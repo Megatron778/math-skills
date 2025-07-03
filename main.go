@@ -2,38 +2,55 @@ package main
 
 import (
 	"fmt"
-	mathskillls "mathskills/functions"
+	"math"
 	"os"
 	"strconv"
 	"strings"
+  	"mathskills/functions"
 )
 
 func main() {
+	Arg := os.Args
+	if len(Arg) != 2 {
+		fmt.Println("invalid input: Please entre one arguments")
+		return
+	}
 
-	filename := os.Args
+	if !strings.HasSuffix(Arg[1], ".txt") && !strings.HasSuffix(Arg[1], ".TXT") {
+		fmt.Println("Invalid input: Please use a .txt extension")
+		return
+	}
 
-	if len(os.Args) > 2 {
-		fmt.Println("invalid input")
-	} 
-
-	data , err := os.ReadFile(filename[1])
-
+	data, err := os.ReadFile(Arg[1])
 	if err != nil {
-		fmt.Println("Error :" , err)
+		fmt.Println("Error :", err)
+		return
 	}
 
-	slice := strings.Split(string(data), "\n")
+	dataslice := strings.Split(string(data), "\n")
 
-	var dataslice []int
-	for _, nb := range slice {
-		number, _ := strconv.Atoi(nb)
-
-		dataslice = append(dataslice, number) 
+	dataslice = mathskills.CleanSlice(dataslice)
+	if len(dataslice) == 0 {
+		fmt.Println("Error:", Arg[1], "is empty")
+		return
+	}
+	var datafloat []float64
+	for _, v := range dataslice {
+		number, err := strconv.Atoi(v)
+		if err != nil {
+			fmt.Println("Error Converting :", err)
+			return
+		}
+		datafloat = append(datafloat, float64(number))
 	}
 
-	fmt.Println(dataslice)
-	Average := mathskillls.Average(dataslice)
-	Median := mathskillls.Median(dataslice)
-	Variance := mathskillls.Variance(dataslice, Average)
-	fmt.Println(Median + Average)
+	Average := mathskills.Average(datafloat)
+	Median := mathskills.Median(datafloat)
+	Variance := mathskills.Variance(datafloat, Average)
+	StandardDeviation := math.Sqrt(Variance)
+
+	fmt.Println("Average:", int(math.Round(Average)))
+	fmt.Println("Median:", int(math.Round(Median)))
+	fmt.Println("Variance:", int(math.Round(Variance)))
+	fmt.Println("Standard Deviation:", int(math.Round(StandardDeviation)))
 }

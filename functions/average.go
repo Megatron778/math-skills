@@ -1,11 +1,9 @@
-package mathskillls
+package mathskills
 
-func Average(slice []int) int {
-	var result int
-
-	for i := 0; i < len(slice); i++ {
-		result += slice[i]
+func Average(numbers []float64) float64 {
+	var result float64
+	for _, v := range numbers {
+		result += v
 	}
-
-	return result / len(slice)
+	return result / float64(len(numbers))
 }

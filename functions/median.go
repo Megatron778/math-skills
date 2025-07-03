@@ -1,21 +1,17 @@
-package mathskillls
+package mathskills
 
-import "fmt"
-
-func Median(slice []int) int {
-	for i := 0; i < len(slice); i++ {
-		for j := 0; j < len(slice); j++ {
-			if i != j && slice[i] < slice[j] {
-				slice[i], slice[j] = slice[j], slice[i]
+func Median(numbers []float64) float64 {
+	for i := 0; i < len(numbers); i++ {
+		for j := 0; j < len(numbers); j++ {
+			if i != j && numbers[i] < numbers[j] {
+				numbers[i], numbers[j] = numbers[j], numbers[i]
 			}
 		}
 	}
-	fmt.Println(slice)
 
-	if len(slice)%2 == 0 {
-		fmt.Println(slice[(len(slice)/2)-1])
-		return slice[len(slice)/2] + slice[(len(slice)/2)-1]
+	if len(numbers)%2 == 0 {
+		return (numbers[len(numbers)/2] + numbers[(len(numbers)/2)-1]) / 2
 	} else {
-		return slice[(len(slice) / 2)]
+		return numbers[len(numbers)/2]
 	}
 }

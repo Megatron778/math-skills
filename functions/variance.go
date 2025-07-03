@@ -1,9 +1,10 @@
-package mathskillls
+package mathskills
 
-func Variance(slice []int,Average int) int {
-	var result int
-	for i := 0; i < len(slice); i++ {
-		result += (slice[i] - Average) * (slice[i] - Average) 
+func Variance(numbers []float64, Average float64) float64 {
+
+	var result float64
+	for _, v := range numbers {
+		result += (v - Average) * (v - Average)
 	}
-	return result / len(slice)
+    return 	result / float64(len(numbers))
 }
