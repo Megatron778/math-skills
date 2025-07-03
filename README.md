@@ -30,16 +30,4 @@ Use the following command to run the program from your terminal:
 go run main.go data.txt
 Replace data.txt with the path to your .txt file containing integer values.
 
----
 
-## 🗂️ Project Structure
-
-math-skills/
-├── main.go
-├── functions/
-│ ├── clean.go // Cleans and filters input
-│ ├── average.go // Calculates the average
-│ ├── median.go // Calculates the median
-│ ├── variance.go // Calculates the variance
-├── data.txt // Example data file
-└── README.md
